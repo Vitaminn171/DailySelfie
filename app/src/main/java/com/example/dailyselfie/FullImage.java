@@ -11,6 +11,12 @@ import java.io.File;
 import java.io.Serializable;
 import java.util.Objects;
 
+/*
+Tên: Lý Quốc An
+MSSV: 3119410002
+ */
+
+
 public class FullImage extends AppCompatActivity implements Serializable {
     private ImageView imageViewFull;
     private File file;

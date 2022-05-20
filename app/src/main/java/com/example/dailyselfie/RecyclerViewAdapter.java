@@ -16,6 +16,12 @@ import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/*
+Tên: Lý Quốc An
+MSSV: 3119410002
+ */
+
+
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> implements Serializable {
     private final LayoutInflater layoutInflater;
     private final ArrayList<Selfie> selfies;

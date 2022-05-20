@@ -1,7 +1,4 @@
 package com.example.dailyselfie;
-
-
-
 import static androidx.core.content.ContextCompat.createDeviceProtectedStorageContext;
 
 import android.app.Notification;
@@ -16,6 +13,12 @@ import android.os.Build;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+
+/*
+Tên: Lý Quốc An
+MSSV: 3119410002
+ */
+
 
 public class Receiver extends BroadcastReceiver {
 

@@ -4,6 +4,12 @@ import androidx.annotation.NonNull;
 
 import java.io.Serializable;
 
+/*
+Tên: Lý Quốc An
+MSSV: 3119410002
+ */
+
+
 public class Selfie implements Serializable {
 
     private final transient String pathSelfieFile;

@@ -38,6 +38,12 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Objects;
 
+/*
+Tên: Lý Quốc An
+MSSV: 3119410002
+ */
+
+
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "myLogs";
     private static final String PROVIDER = "com.example.dailyselfie";
