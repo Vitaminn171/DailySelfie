@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public File getCurrentFile() {
-        String imageFileName = "SELFIE_";
+        String imageFileName = "Img_";
         File imageFile = null;
         try {
             imageFile = File.createTempFile(

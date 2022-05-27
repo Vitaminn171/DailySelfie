@@ -42,7 +42,6 @@ public class FullImage extends AppCompatActivity implements Serializable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_full_image);
         imageViewFull = findViewById(R.id.imageFull);
-
         setDataFromIntent();
     }
 
