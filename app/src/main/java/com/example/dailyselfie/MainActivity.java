@@ -15,9 +15,18 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -52,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String CHANNEL_ID = "123";
     private ArrayList<Selfie> selfiesList;
     private RecyclerViewAdapter recyclerViewAdapter;
+    private Button buttonYes,buttonNo;
 
     private final ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -98,16 +108,20 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.camera) {
             getImageFromCamera();
         }
+        if (id == R.id.delete) {
+            onButtonShowPopupWindowClick(findViewById(R.id.recview));
+        }
         return super.onOptionsItemSelected(item);
     }
 
-    private ArrayList<File> getStorageDirlistFiles() {
+    public ArrayList<File> getStorageDirlistFiles() {
         File storageDir = this.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         ArrayList<File> storageDirlistFiles = new ArrayList<>();
         if (storageDir != null) {
@@ -146,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private File getCurrentFile() {
+    public File getCurrentFile() {
         String imageFileName = "SELFIE_";
         File imageFile = null;
         try {
@@ -189,5 +203,43 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewAdapter.notifyDataSetChanged();
 
     }
+    public void onButtonShowPopupWindowClick(View view) {
+        LayoutInflater inflater = (LayoutInflater)
+                getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.popup_window,null);
 
+
+        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true; // lets taps outside the popup also dismiss it
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+        buttonYes = popupView.findViewById(R.id.buttonYes);
+        buttonNo = popupView.findViewById(R.id.buttonNo);
+        TextView textView = popupView.findViewById(R.id.textDel);
+        String text = "Delete all image ?";
+        textView.setText(text);
+        buttonNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
+
+        buttonYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!getStorageDirlistFiles().isEmpty()) {
+                    for (File file : getStorageDirlistFiles()) {
+                        file.delete();
+                    }
+                }
+                selfiesList.clear();
+                recyclerViewAdapter.notifyDataSetChanged();
+                popupWindow.dismiss();
+            }
+        });
+
+    }
 }

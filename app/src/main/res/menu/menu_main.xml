@@ -4,4 +4,8 @@
         android:title="@string/camera"
         android:icon="@drawable/ic_camera"
         app:showAsAction="always"/>
+    <item android:id="@+id/delete"
+        android:title="@string/camera"
+        android:icon="@android:drawable/ic_delete"
+        app:showAsAction="ifRoom"/>
 </menu>
