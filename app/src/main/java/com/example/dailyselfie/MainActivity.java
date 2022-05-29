@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                             if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.N) {
                                 uri = Uri.fromFile(new File(absolutePathCurrentFile));
                             } else {
-                                uri = FileProvider.getUriForFile(getApplicationContext(), PROVIDER, new File(absolutePathCurrentFile));
+                                uri = FileProvider.getUriForFile(getApplicationContext(), BuildConfig.APPLICATION_ID + ".provider", new File(absolutePathCurrentFile));
                             }
                             Log.d(TAG, "Uri is " + uri);
 
